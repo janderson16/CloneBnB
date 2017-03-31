@@ -31,7 +31,6 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">All Listings
-                    <small>Secondary Text</small>
                 </h1>
             </div>
         </div>
@@ -46,7 +45,7 @@
               </div>
               <img class="img-responsive" src= "<%= listing.images[0].image_url %>">
                 <h3>
-                  <%= link_to listing.title, listing_path(listing)  %>
+                  <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><%= link_to listing.title, listing_path(listing)  %></p>
                 </h3>
                 <div class="ellipsis"><p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><%= listing.description %></p></div>
             </div>
