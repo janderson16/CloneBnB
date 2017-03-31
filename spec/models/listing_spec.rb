@@ -19,6 +19,7 @@ describe Listing do
     it { should have_many(:user_roles) }
     it { should have_many(:reservations) }
     it { should have_many(:images) }
+    it { should have_many(:amenities).through(:listings_amenities) }
   end
 
   describe "#range_available?" do
