@@ -4,6 +4,7 @@ class Seed
     seed = Seed.new
     seed.generate_users
     seed.generate_listings
+    seed.generate_amenities
     seed.generate_images
     seed.generate_reservations
     seed.generate_roles
@@ -41,7 +42,26 @@ class Seed
         number_rooms: Faker::Number.between(1, 30)
         )
         puts "Listing #{listing.title} created!"
+    end
+  end
 
+  def generate_amenities
+    amenities = [:elevator, :pets_allowed, :free_parking, :family_kid_friendly, :doorman, :pool, :hot_tub,
+    :gym, :air_conditioning, :wheelchair_accessible, :internet, :smoking_allowed, :suitable_for_events,
+    :wireless_internet, :indoor_fireplace, :breakfast, :kitchen, :cable_tv, :dryer, :hair_dryer, :washer,
+    :tv, :buzzer_wireless_intercom, :iron, :essentials, :laptop_friendly_workspace, :heating, :private_entrance]
+
+    amenities.each do |amenity|
+      Amenity.create!(
+      amenity:Faker::Boolean
+      )
+      puts "Amenity #{amenity} created!"
+    end
+  end
+
+  def generate_listings_amenities
+    Listing.all.each do |i|
+      i.listing_amenities.create!(listing: i, amenity: Amenity.sample)
     end
   end
 
@@ -82,6 +102,7 @@ class Seed
     Role.create!(title: "traveler")
     puts "Traveler role created!"
   end
+
 end
 
 Seed.start

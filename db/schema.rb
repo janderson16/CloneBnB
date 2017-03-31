@@ -10,31 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330161254) do
+ActiveRecord::Schema.define(version: 20170330230512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "citext"
 
-  create_table "images", force: :cascade do |t|
-    t.string  "image_url"
-    t.integer "listing_id"
-    t.index ["listing_id"], name: "index_images_on_listing_id", using: :btree
-  end
-
-  create_table "listings", force: :cascade do |t|
-    t.integer "user_id"
-    t.citext  "street_address"
-    t.string  "description"
-    t.citext  "city"
-    t.citext  "state"
-    t.string  "zipcode"
-    t.string  "max_occupancy"
-    t.citext  "title"
-    t.string  "list_category"
-    t.string  "number_beds"
-    t.string  "number_rooms"
-    t.boolean "number_baths",              default: false
+  create_table "amenities", force: :cascade do |t|
     t.boolean "elevator",                  default: false
     t.boolean "pets_allowed",              default: false
     t.boolean "free_parking",              default: false
@@ -63,7 +45,35 @@ ActiveRecord::Schema.define(version: 20170330161254) do
     t.boolean "laptop_friendly_workspace", default: false
     t.boolean "heating",                   default: false
     t.boolean "private_entrance",          default: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string  "image_url"
+    t.integer "listing_id"
+    t.index ["listing_id"], name: "index_images_on_listing_id", using: :btree
+  end
+
+  create_table "listings", force: :cascade do |t|
+    t.integer "user_id"
+    t.citext  "street_address"
+    t.string  "description"
+    t.citext  "city"
+    t.citext  "state"
+    t.string  "zipcode"
+    t.string  "max_occupancy"
+    t.citext  "title"
+    t.string  "list_category"
+    t.string  "number_beds"
+    t.string  "number_rooms"
+    t.string  "number_baths"
     t.index ["user_id"], name: "index_listings_on_user_id", using: :btree
+  end
+
+  create_table "listings_amenities", force: :cascade do |t|
+    t.integer "listing_id"
+    t.integer "amenity_id"
+    t.index ["amenity_id"], name: "index_listings_amenities_on_amenity_id", using: :btree
+    t.index ["listing_id"], name: "index_listings_amenities_on_listing_id", using: :btree
   end
 
   create_table "messages", force: :cascade do |t|
@@ -108,6 +118,8 @@ ActiveRecord::Schema.define(version: 20170330161254) do
 
   add_foreign_key "images", "listings"
   add_foreign_key "listings", "users"
+  add_foreign_key "listings_amenities", "amenities"
+  add_foreign_key "listings_amenities", "listings"
   add_foreign_key "reservations", "listings"
   add_foreign_key "reservations", "users"
   add_foreign_key "user_roles", "listings"
