@@ -7,20 +7,23 @@
         <div class="container-fluid">
             <div class="row">
               <div class="col-md-12">
+
                 <div class="card">
                   <div class="header">
                     <h1>Reservations</h1>
                     <hr>
                     <table class="content table table-striped">
                       <thead class="headers">
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <tr>
+                          <th>Start Date</th>
+                          <th>End Date</th>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Email</th>
+                          <th>Phone Number</th>
+                          <th>Status</th>
+                          <th>Action</th>
+                        </tr>
                       </thead>
                       <tbody class="records all_listings">
                         <% @listings.each do |listing| %>
