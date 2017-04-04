@@ -31,7 +31,6 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :edit, :update] do
     resources :reservations, only: [:index, :show, :new, :create, :update]
-    resources :messages
     resources :trips, only: [:index, :show]
     resources :reviews, only: [:index]
     get 'listings', to: 'user/listings#index'
