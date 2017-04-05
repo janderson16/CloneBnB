@@ -20,6 +20,7 @@ describe Listing do
     it { should have_many(:images) }
     it { should have_many(:listing_amenities) }
     it { should have_many(:amenities) }
+    it { should have_many(:reviews) }
   end
 
   describe "#range_available?" do
