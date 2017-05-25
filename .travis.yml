@@ -6,4 +6,8 @@ services:
 before_script:
 - psql -c 'create database clonebnb_test;' -U postgres
 
-script: bundle exec rake db:setup rspec
+script:
+        - bundle exec
+        - rake db:setup
+        - rake db:test:prepare
+        - rspec spec
